@@ -101,3 +101,15 @@ The solution uses the following NuGet packages:
  - Microsoft.Rest.ClientRuntime.Azure v3.3.19
  - Newtonsoft.Json v12.0.1
  - System.IdentityModel.Tokens.Jwt v5.4.0
+
+To run the application, make sure you register it in Azure AD and get the client id and client secret and use them in the app.config.
+You will also need to set the Azure AD Tenant ID and the Key Vault Uri:
+
+ ``` xml
+   <appSettings>
+    <add key="ida:TenantId" value="[Azure AD Tenant ID]"/>
+    <add key="KeyVaultUri" value="https://[keyvault name].vault.azure.net"/>
+    <add key="ida:ClientId" value="[Azure AD registered App ID]"/>
+    <add key="ida:ClientSecret" value="[Azure AD registered App secret]"/>
+  </appSettings>
+``` 
