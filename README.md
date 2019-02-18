@@ -8,7 +8,7 @@ A script is provided to register the application and assign permissions in Key V
 ./scripts/create-AAD-app.ps1
 ```
 You will need to provide the application name, and optionally App Uri, Home page Url, and reply Urls.
-Additionally, yopu will need to specify the resource group name and the key vault name.
+Additionally, you will need to specify the resource group name and the key vault name.
 To execute the script, you will need to connect to Azure using
 
 ``` PowerShell
@@ -41,12 +41,12 @@ Connect-AzureRmAccount
 
 The solution contains the following projects:
 
- - **Microsoft.CommonLib** - a simple library containing <code>IConfigReader</code> interface for unifying the configuration.
+ - **Microsoft.CommonLib** - a simple library containing <code>IConfigReader</code> interface for unifying configuration usage and dependency injection.
 
  -  **Microsoft.ConfigReaders** - contains implementations for <code>IConfigReader</code> interface:
    1. <code>AppSettingsConfigReader</code> - uses <code>ConfigurationManager.AppSettings</code> to retrieve the configuration settings;
    2. <code>CredentialsKeyVaultConfigReader</code> - uses credentials (application ID and secret) to get access to Azure Key Vault;
-   3. Uses <code>AzureServiceTokenProvider</code> to get access to Azure Key Vault;
+   3. <code>KeyVaultConfigReader</code> - uses <code>AzureServiceTokenProvider</code> to get access to Azure Key Vault;
  
  - **Microsoft.Tokens** - contains the <code>JwtGen</code> class responsible for generating, parsing, and validating JWTs;
 
@@ -87,3 +87,17 @@ Console.WriteLine("Principal: {0}", principal.Identity.Name);
 Console.WriteLine("Subscription: {0}", principal.Claims.SingleOrDefault(c => c.Type == nameof(subscription)).Value);
 ```
 
+The solution uses the following NuGet packages:
+
+ - Microsoft.Azure.KeyVault v3.0.3
+ - Microsoft.Azure.KeyVault.Core v3.0.3
+ - Microsoft.Azure.KeyVault.WebKey v3.0.3
+ - Microsoft.Azure.Services.AppAuthentication v1.0.3
+ - Microsoft.IdentityModel.Clients.ActiveDirectory v4.5.1
+ - Microsoft.IdentityModel.JsonWebTokens v5.4.0
+ - Microsoft.IdentityModel.Logging v5.4.0
+ - Microsoft.IdentityModel.Tokens v5.4.0
+ - Microsoft.Rest.ClientRuntime v2.3.19
+ - Microsoft.Rest.ClientRuntime.Azure v3.3.19
+ - Newtonsoft.Json v12.0.1
+ - System.IdentityModel.Tokens.Jwt v5.4.0
